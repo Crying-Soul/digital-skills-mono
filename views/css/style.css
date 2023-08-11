@@ -1,0 +1,67 @@
+/*Main variables*/
+:root {
+    --blur: blur(16px) saturate(180%);
+    --main-color: rgba(255, 255, 255, 0.35);
+    --accent-color: #00AEEF;
+    --radius: 12px;
+    --border: 1px solid rgba(209, 213, 219, 0.3);
+}
+html, body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    background-image: url("/assets/img/bg-hexagon.svg"), linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    width: 100%;
+    height: 100%;
+}
+/*Main container styling*/
+.bg-container {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    height: 100%;
+    width: 100%;
+
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    background-color: var(--main-color);
+    border-radius: var(--radius);
+    border: var(--border);
+}
+/*Container's content styling*/
+.header-row {
+    width: 100%;
+    padding: 1rem;
+}
+.logo-col {
+     display: flex;
+     justify-content: center;
+ }
+.ds-logo {
+    width: 40%;
+}
+.form-body {
+    width: 100%;
+    max-width: 20vw;
+    align-self: center;
+    padding-top: 1rem;
+}
+.form-outline {
+    background-color: rgba(164, 164, 164, 0.1);
+    border-radius: var(--radius);
+}
+.heading {
+    text-align: center;
+}
+.disclaimer-row {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    text-align: center;
+    margin-top: 2rem!important;
+}
+.disclaimer-text {
+    margin-bottom: 0;
+}
