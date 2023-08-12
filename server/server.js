@@ -2,10 +2,8 @@ const express = require('express');
 const {engine} = require('express-handlebars');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const userRouter = require('./routes/user.routes.js');
-const authRouter = require('./routes/auth.routes.js');
-
-
+const userRouter = require('../routes/user.routes');
+const authRouter = require('../routes/auth.routes');
 
 module.exports = class Server {
     constructor(port = process.env.port || 8081){

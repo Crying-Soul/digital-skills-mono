@@ -1,11 +1,12 @@
+require('dotenv').config();
 const { Pool } = require('pg')
  
 const pool = new Pool({
-    user: 'Crying-Soul',
-    host: 'ep-twilight-grass-17587475.us-east-2.aws.neon.tech',
-    database: 'neondb',
-    password: 'kyD8Lp2rnjRW',
-    port: 5432,
+    user: process.env.POSTGRESS_USER,
+    host: process.env.POSTGRESS_HOST,
+    database: process.env.POSTGRESS_DBNAME,
+    password: process.env.POSTGRESS_PASSWORD,
+    port: process.env.POSTGRESS_PORT,
     ssl: {
       rejectUnauthorized: false
   }
