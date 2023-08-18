@@ -1,20 +1,11 @@
-<form id="login" method="post">
-  <input id="input-email" type="text" placeholder="email" />
-  <input id="input-password" type="text" placeholder="password" />
-  <button type="submit">Login</button>
-</form>
 <h2>Login</h2>
-<script src="/js/Request.js"></script>
-<script>
-  const form = document.getElementById("login"); form.addEventListener('submit',
-  async e => {
-    e.preventDefault();
-     const data = await Request.post('http://127.0.0.1:8081/user/auth/login',
-  { email:document.getElementById('input-email').value, 
-  password: document.getElementById('input-password') 
-  }) 
-  if (data.token){
-  localStorage.setItem('token', JSON.stringify(data.token))
-   location.href ='/user/profile?token='+JSON.parse(localStorage.getItem('token')) 
-   } }, false)
-</script>
+<div class="error" style="color: red;">
+  {{error.msg}}
+</div>
+<form id="login" action="/user/login" method="POST">
+  <input id="input-email" type="text" name="email" placeholder="email" />
+  <input id="input-password" type="text" name="password" placeholder="password" />
+  <input type="submit" />
+</form>
+
+
