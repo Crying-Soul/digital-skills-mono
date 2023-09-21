@@ -4,10 +4,10 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const userRouter = require("../routes/user.routes");
-const authRouter = require("../routes/api.routes/auth.routes");
+
 
 module.exports = class Server {
-  constructor(port = process.env.port || 8081) {
+  constructor(port = process.env.port || 3000) {
     this.port = port;
     this.app = express();
     this.sessLifeTime = 1000 * 60 * 60 * 4;
@@ -31,8 +31,9 @@ module.exports = class Server {
 
   start() {
     this.setup();
+    this.app.use('/', userRouter)
     this.app.use("/user", userRouter);
-    this.app.use("/user/auth", authRouter);
+    // this.app.use("/user/auth", authRouter);
     this.app.listen(this.port, () => {
       console.log(`Server started at http://127.0.0.1:${this.port}`);
     });

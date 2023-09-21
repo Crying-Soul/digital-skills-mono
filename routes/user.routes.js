@@ -7,6 +7,16 @@ const router = new Router();
  * Get requests
  */
 router.get(
+  "/",
+  function (req, res, next) {
+    if (req.session.token) {
+      return res.redirect("/user/profile");
+    }
+    next();
+  },
+  userController.login
+);
+router.get(
   "/login",
   function (req, res, next) {
     if (req.session.token) {

@@ -1,42 +1,33 @@
-const db = require("../db/db.js");
 class User {
   async getAll() {
-    return (await db.query(`SELECT * FROM users;`)).rows;
+    return await db.query(`SELECT * FROM users;`);
   }
 
-  async createUser(name, email, password, token = null) {
-    return (
-      await db.query(
-        `INSERT INTO users (name, email, password, token) VALUES ($1,$2,$3,$4) RETURNING *;`,
-        [name, email, password, token]
-      )
-    ).rows[0];
+  async createUser(email, password, token = null) {
+    return await db.query(
+      `INSERT INTO users (email, uniq_id, password, token) VALUES (?,?,?,?) RETURNING *;`,
+      [email, uuidv4(), password, token]
+    );
+
   }
   async isUserExists(email) {
+    console.log(await db.query(`SELECT * FROM users WHERE email=?;`, [email]));
     return (
-      await db.query(`SELECT EXISTS(SELECT 1 FROM users WHERE email = $1);`, [
-        email,
-      ])
-    ).rows[0].exists;
+      (await db.query(`SELECT * FROM users WHERE email=?;`, [email])).length > 0
+    );
   }
 
   async findOne(email) {
-    return (
-      (await db.query(`SELECT * FROM users WHERE email = $1;`, [email]))
-        .rows[0] || null
-    );
+    return (await db.query(`SELECT * FROM users WHERE email=?;`, [email]))[0];
   }
   async updateToken(email, token) {
-    return (
-      await db.query(
-        `UPDATE users SET token = $2 WHERE email = $1 RETURNING *;`,
-        [email, token]
-      )
-    ).rows[0];
+    return await db.query(`UPDATE users SET token = ? WHERE email = ?;`, [
+      token,
+      email,
+    ]);
   }
   async findByToken(token) {
-    return (await db.query(`SELECT * FROM users WHERE token = $1`, [token]))
-      .rows[0];
+    return (await db.query(`SELECT * FROM users WHERE token=?;`, [token]))[0];
   }
 }
 
